@@ -29,8 +29,13 @@ class RipCommunication(Device):
     def __init__(self, index: int, number_of_devices: int, medium: Medium):
         super().__init__(index, number_of_devices, medium)
         
-        self.neighbors = [] # generate an appropriate list
-
+        if index == number_of_devices-1:
+            self.neighbors = [ index-1, 0 ] # generate an appropriate list
+        elif index == 0:
+            self.neighbors = [ number_of_devices-1, index+1 ]
+        else:
+            self.neighbors = [ index-1, index+1 ]
+        
         self.routing_table = dict()
 
     def run(self):
@@ -68,6 +73,7 @@ class RipCommunication(Device):
 
     def merge_tables(self, src, table):
         # return None if the table does not change
+        
         pass
 
 
